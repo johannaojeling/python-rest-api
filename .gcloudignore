@@ -1,0 +1,14 @@
+.envrc
+.envrc.sample
+.flake8
+.gcloudignore
+.git
+.git-hooks
+.github
+.gitignore
+.idea
+.pre-commit-config.yaml
+README.md
+requirements-test.txt
+tests
+venv

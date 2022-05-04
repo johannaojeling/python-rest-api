@@ -1,0 +1,59 @@
+name: CI Pipeline
+on: [ push ]
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: "3.9"
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Set up cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pre-commit
+            ~/.cache/pip
+            ~/venv
+          key: pre-commit-${{ hashFiles('**/.pre-commit-config.yaml') }}
+      - name: Create and activate virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+      - name: Install pre-commit
+        run: pip install -U pre-commit
+      - name: Run pre-commit checks
+        run: pre-commit run -a
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: "3.9"
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Set up cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/venv
+          key: test-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements-test.txt') }}
+      - name: Create and activate virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
+      - name: Run unit tests
+        run: pytest tests --asyncio-mode=auto

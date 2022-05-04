@@ -1,0 +1,15 @@
+set -a
+
+# Local
+export PORT="8080"
+export FIRESTORE_EMULATOR_HOST="localhost:8090"
+export COLLECTION=""
+
+# GCP
+export PROJECT=""
+export REGION=""
+export CLOUD_BUILD_BUCKET=""
+export CLOUD_RUN_SA=""
+export IMAGE=""
+export SERVICE=""
+export COLLECTION=""
