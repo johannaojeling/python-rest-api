@@ -3,8 +3,8 @@ from google.cloud.firestore_v1 import AsyncClient
 
 from app.api.router import api_router
 from app.config.settings import Settings
+from app.database.firestore import FirestoreDatabase
 from app.repositories.firestore_user_repository import FirestoreUserRepository
-from app.utils.firestore import FirestoreDatabase
 
 app = FastAPI()
 app.include_router(api_router)

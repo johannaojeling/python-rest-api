@@ -3,8 +3,8 @@ from typing import List, Optional
 from fastapi.encoders import jsonable_encoder
 
 from app import schemas
+from app.database.firestore import FirestoreDatabase
 from app.repositories.user_repository import UserNotFound, UserRepository
-from app.utils.firestore import FirestoreDatabase
 
 
 class FirestoreUserRepository(UserRepository):
