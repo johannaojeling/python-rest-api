@@ -7,9 +7,13 @@ class UserBase(BaseModel):
     email: EmailStr
 
 
-class UserRequest(UserBase):
+class UserCreate(UserBase):
     pass
 
 
-class UserResponse(UserBase):
+class UserUpdate(UserBase):
+    pass
+
+
+class User(UserBase):
     id: str

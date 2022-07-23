@@ -3,7 +3,7 @@ from typing import Any, AsyncIterator, Dict, Optional, Tuple
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP, AsyncClient
 
 
-class FirestoreClient:
+class FirestoreDatabase:
     create_at_key: str = "created_at"
     updated_at_key: str = "updated_at"
 
@@ -54,7 +54,3 @@ class FirestoreClient:
         document_id: str,
     ) -> None:
         await self._client.collection(collection).document(document_id).delete()
-
-    async def exists(self, collection: str, document_id: str) -> bool:
-        doc = await self._client.collection(collection).document(document_id).get()
-        return doc.exists
